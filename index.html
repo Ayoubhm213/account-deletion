@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حذف حساب | Account Deletion | Suppression de compte - LivrailyFood</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --primary-dark: #27ae60;
+            --secondary: #3498db;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --warning: #e74c3c;
+            --gray: #95a5a6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Language Selector */
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            background: var(--light);
+            padding: 15px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .lang-btn {
+            background: white;
+            border: 2px solid var(--gray);
+            color: var(--dark);
+            padding: 8px 20px;
+            margin: 0 5px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 40px;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .step-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid var(--primary);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateX(5px);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .step-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .info-box {
+            background: #fff8e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px dashed #ffb300;
+        }
+        
+        .contact-box {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            margin: 30px 0;
+            border: 2px solid var(--primary);
+        }
+        
+        .email-link {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .email-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .icon {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--dark);
+            color: white;
+            border-top: 5px solid var(--primary);
+        }
+        
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content-section {
+                padding: 25px;
+            }
+            
+            .lang-btn {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-user-slash icon"></i> حذف حساب المستخدم</h1>
+            <p>User Account Deletion | Suppression de compte utilisateur</p>
+        </div>
+        
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <button class="lang-btn active" data-lang="ar">العربية</button>
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="fr">Français</button>
+        </div>
+        
+        <!-- Arabic Content -->
+        <div class="content-section active" id="content-ar">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3><i class="fas fa-envelope icon"></i> كيفية طلب حذف حسابك</h3>
+                <p>لحذف حسابك وبياناتك الشخصية من تطبيق <strong>LivrailyFood</strong>، يرجى اتباع الخطوات التالية:</p>
+                <ul style="padding-right: 20px; margin-top: 10px;">
+                    <li>أرسل بريدًا إلكترونيًا إلى: <strong>privacy@livrailyfood.com</strong></li>
+                    <li>استخدم <strong>عنوان البريد الإلكتروني</strong> المرتبط بحسابك في التطبيق</li>
+                    <li>اكتب في <strong>موضوع الرسالة</strong>: "طلب حذف حساب - LivrailyFood"</li>
+                    <li>يمكنك إضافة أي تفاصيل إضافية في نص الرسالة</li>
+                </ul>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3><i class="fas fa-clock icon"></i> المدة الزمنية والمعالجة</h3>
+                <p>بعد استلام طلبك:</p>
+                <ul style="padding-right: 20px; margin-top: 10px;">
+                    <li>سنتواصل معك لتأكيد الهوية خلال <strong>3 أيام عمل</strong></li>
+                    <li>سيتم حذف <strong>جميع بياناتك الشخصية</strong> بما في ذلك:
+                        <ul style="padding-right: 20px; margin-top: 5px;">
+                            <li>معلومات الحساب (الاسم، البريد الإلكتروني، الهاتف)</li>
+                            <li>عنوان التوصيل وعناوينك المحفوظة</li>
+                            <li>سجل الطلبات والتاريخ</li>
+                            <li>التفضيلات والإعدادات الشخصية</li>
+                        </ul>
+                    </li>
+                    <li>ستتلقى <strong>تأكيدًا بالحذف النهائي</strong> خلال <strong>30 يوم عمل</strong> كحد أقصى</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-info-circle icon"></i> معلومات هامة</h3>
+                <p>• قد نكون ملزمين قانونيًا بالاحتفاظ ببعض <strong>بيانات المعاملات المالية</strong> لفترات محددة وفقًا للقوانين المحلية.</p>
+                <p>• لن يتم استخدام أي بيانات محفوظة لأغراض تسويقية أو مشاركتها مع أطراف ثالثة.</p>
+                <p>• يمكنك الاطلاع على <a href="https://livrailyfood.com/privacy" target="_blank">سياسة الخصوصية الكاملة</a> لمزيد من التفاصيل.</p>
+            </div>
+            
+            <div class="contact-box">
+                <h3><i class="fas fa-paper-plane icon"></i> أرسل طلبك الآن</h3>
+                <p>انقر على الزر أدناه لإرسال بريد إلكتروني مباشر:</p>
+                <a href="mailto:privacy@livrailyfood.com?subject=طلب حذف حساب - LivrailyFood" class="email-link">
+                    <i class="fas fa-envelope"></i> إرسال طلب الحذف
+                </a>
+                <p>أو أرسل يدويًا إلى: <strong>privacy@livrailyfood.com</strong></p>
+            </div>
+        </div>
+        
+        <!-- English Content -->
+        <div class="content-section" id="content-en">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3><i class="fas fa-envelope icon"></i> How to Request Account Deletion</h3>
+                <p>To delete your account and personal data from the <strong>LivrailyFood</strong> application, please follow these steps:</p>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li>Send an email to: <strong>privacy@livrailyfood.com</strong></li>
+                    <li>Use the <strong>email address</strong> associated with your app account</li>
+                    <li>Write in the <strong>subject line</strong>: "Account Deletion Request - LivrailyFood"</li>
+                    <li>You may add any additional details in the message body</li>
+                </ul>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3><i class="fas fa-clock icon"></i> Processing Time & Procedure</h3>
+                <p>After receiving your request:</p>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li>We will contact you to confirm identity within <strong>3 business days</strong></li>
+                    <li>All your personal data will be deleted including:
+                        <ul style="padding-left: 20px; margin-top: 5px;">
+                            <li>Account information (name, email, phone)</li>
+                            <li>Delivery address and saved addresses</li>
+                            <li>Order history and records</li>
+                            <li>Preferences and personal settings</li>
+                        </ul>
+                    </li>
+                    <li>You will receive <strong>final deletion confirmation</strong> within <strong>30 business days</strong> maximum</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-info-circle icon"></i> Important Information</h3>
+                <p>• We may be legally required to retain some <strong>financial transaction data</strong> for specific periods according to local laws.</p>
+                <p>• Any retained data will not be used for marketing purposes or shared with third parties.</p>
+                <p>• You can review the <a href="https://livrailyfood.com/privacy" target="_blank">full Privacy Policy</a> for more details.</p>
+            </div>
+            
+            <div class="contact-box">
+                <h3><i class="fas fa-paper-plane icon"></i> Send Your Request Now</h3>
+                <p>Click the button below to send a direct email:</p>
+                <a href="mailto:privacy@livrailyfood.com?subject=Account Deletion Request - LivrailyFood" class="email-link">
+                    <i class="fas fa-envelope"></i> Send Deletion Request
+                </a>
+                <p>Or send manually to: <strong>privacy@livrailyfood.com</strong></p>
+            </div>
+        </div>
+        
+        <!-- French Content -->
+        <div class="content-section" id="content-fr">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3><i class="fas fa-envelope icon"></i> Comment demander la suppression de compte</h3>
+                <p>Pour supprimer votre compte et vos données personnelles de l'application <strong>LivrailyFood</strong>, veuillez suivre ces étapes :</p>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li>Envoyez un email à : <strong>privacy@livrailyfood.com</strong></li>
+                    <li>Utilisez l'<strong>adresse email</strong> associée à votre compte dans l'application</li>
+                    <li>Écrivez dans l'<strong>objet du message</strong> : "Demande de suppression de compte - LivrailyFood"</li>
+                    <li>Vous pouvez ajouter des détails supplémentaires dans le corps du message</li>
+                </ul>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3><i class="fas fa-clock icon"></i> Délai de traitement et procédure</h3>
+                <p>Après réception de votre demande :</p>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li>Nous vous contacterons pour confirmer votre identité dans les <strong>3 jours ouvrables</strong></li>
+                    <li>Toutes vos données personnelles seront supprimées, y compris :
+                        <ul style="padding-left: 20px; margin-top: 5px;">
+                            <li>Informations du compte (nom, email, téléphone)</li>
+                            <li>Adresse de livraison et adresses enregistrées</li>
+                            <li>Historique des commandes</li>
+                            <li>Préférences et paramètres personnels</li>
+                        </ul>
+                    </li>
+                    <li>Vous recevrez une <strong>confirmation de suppression définitive</strong> dans un délai maximum de <strong>30 jours ouvrables</strong></li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-info-circle icon"></i> Informations importantes</h3>
+                <p>• Nous pouvons être légalement tenus de conserver certaines <strong>données de transaction financière</strong> pendant des périodes spécifiques selon les lois locales.</p>
+                <p>• Toute donnée conservée ne sera pas utilisée à des fins marketing ni partagée avec des tiers.</p>
+                <p>• Vous pouvez consulter la <a href="https://livrailyfood.com/privacy" target="_blank">Politique de confidentialité complète</a> pour plus de détails.</p>
+            </div>
+            
+            <div class="contact-box">
+                <h3><i class="fas fa-paper-plane icon"></i> Envoyez votre demande maintenant</h3>
+                <p>Cliquez sur le bouton ci-dessous pour envoyer un email direct :</p>
+                <a href="mailto:privacy@livrailyfood.com?subject=Demande de suppression de compte - LivrailyFood" class="email-link">
+                    <i class="fas fa-envelope"></i> Envoyer la demande de suppression
+                </a>
+                <p>Ou envoyez manuellement à : <strong>privacy@livrailyfood.com</strong></p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><i class="fas fa-mobile-alt icon"></i> <strong>LivrailyFood</strong> - تطبيق توصيل الطعام | Food Delivery App | Application de livraison de nourriture</p>
+            <p>© 2024 LivrailyFood. جميع الحقوق محفوظة | All rights reserved | Tous droits réservés</p>
+            <p>تواصل معنا: <a href="mailto:support@livrailyfood.com">support@livrailyfood.com</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Language switching functionality
+        document.querySelectorAll('.lang-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Get selected language
+                const lang = this.getAttribute('data-lang');
+                
+                // Hide all content sections
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show selected language content
+                document.getElementById(`content-${lang}`).classList.add('active');
+                
+                // Update page direction for RTL/LTR
+                if (lang === 'ar') {
+                    document.documentElement.dir = 'rtl';
+                } else {
+                    document.documentElement.dir = 'ltr';
+                }
+            });
+        });
+        
+        // Auto-select language based on browser preference
+        const browserLang = navigator.language || navigator.userLanguage;
+        if (browserLang.startsWith('ar')) {
+            document.querySelector('[data-lang="ar"]').click();
+        } else if (browserLang.startsWith('fr')) {
+            document.querySelector('[data-lang="fr"]').click();
+        } else {
+            document.querySelector('[data-lang="en"]').click();
+        }
+    </script>
+</body>
+</html>
+</html>
